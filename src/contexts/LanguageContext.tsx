@@ -124,7 +124,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     },
     ja: {
       // Header
-      'header.name': 'タマナ・アクター',
+      'header.name': 'タマンナ・アクテール',
       'header.title': 'フルスタック開発者',
       'header.description': 'コンピュータサイエンスの堅固な基盤と、モダンなWebアプリケーション構築の実務経験を持つ、多才で意欲的なフルスタック開発者です。',
       'header.location': 'ダッカ、バングラデシュ',

@@ -6,7 +6,17 @@ import Link from 'next/link';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Header() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const handleDownloadResume = () => {
+    const filename = language === 'en' ? 'Tamanna_Akter_en.pdf' : 'Tamanna_Akter_ja.pdf';
+    const link = document.createElement('a');
+    link.href = `/${filename}`;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <motion.header 
@@ -75,7 +85,7 @@ export default function Header() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-blue-500/25"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-blue-500/25 cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4" />
                   {t('header.chatWithAI')}
@@ -83,9 +93,10 @@ export default function Header() {
               </Link>
 
               <motion.button
+                onClick={handleDownloadResume}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-emerald-500/25"
+                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-emerald-500/25 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 {t('header.downloadResume')}

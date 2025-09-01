@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Github, MapPin, Download } from 'lucide-react';
+import { Mail, Github, MapPin, Download, MessageCircle } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -67,14 +68,27 @@ export default function Header() {
               </div>
             </div>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-emerald-500/25"
-            >
-              <Download className="w-4 h-4" />
-              Download Resume
-            </motion.button>
+            <div className="flex flex-col gap-3">
+              <Link href="/chat">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-blue-500/25"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Chat with AI
+                </motion.button>
+              </Link>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-emerald-500/25"
+              >
+                <Download className="w-4 h-4" />
+                Download Resume
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Mail, Github, MapPin } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -33,16 +34,27 @@ export default function Footer() {
           >
             <h4 className="text-lg font-semibold mb-4 text-emerald-300">Quick Links</h4>
             <div className="space-y-2">
-              {['Skills', 'Experience', 'Projects', 'Education', 'Contact'].map((link, index) => (
-                <motion.a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  whileHover={{ x: 5 }}
-                  className="block text-gray-400 hover:text-emerald-300 transition-colors"
-                >
-                  {link}
-                </motion.a>
-              ))}
+              {['Skills', 'Experience', 'Projects', 'Education', 'Contact', 'Chat AI'].map((link, index) => {
+                const href = link === 'Chat AI' ? '/chat' : `#${link.toLowerCase()}`;
+                const LinkComponent = link === 'Chat AI' ? Link : motion.a;
+                
+                return (
+                  <LinkComponent
+                    key={link}
+                    href={href}
+                    {...(link === 'Chat AI' ? {} : { whileHover: { x: 5 } })}
+                    className="block text-gray-400 hover:text-emerald-300 transition-colors"
+                  >
+                    {link === 'Chat AI' ? (
+                      <motion.span whileHover={{ x: 5 }}>
+                        {link}
+                      </motion.span>
+                    ) : (
+                      link
+                    )}
+                  </LinkComponent>
+                );
+              })}
             </div>
           </motion.div>
 

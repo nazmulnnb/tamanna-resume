@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
 const navItems = [
   { name: 'Skills', href: '#skills' },
@@ -10,6 +11,7 @@ const navItems = [
   { name: 'Projects', href: '#projects' },
   { name: 'Education', href: '#education' },
   { name: 'Contact', href: '#contact' },
+  { name: 'Chat AI', href: '/chat' },
 ];
 
 export default function Navigation() {
@@ -52,20 +54,37 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`font-medium transition-colors hover:scale-105 transform ${
-                  scrolled 
-                    ? 'text-gray-700 hover:text-emerald-600' 
-                    : 'text-white hover:text-emerald-300'
-                }`}
-              >
-                {item.name}
-              </motion.a>
+              item.href.startsWith('/') ? (
+                <Link key={item.name} href={item.href}>
+                  <motion.span
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className={`font-medium transition-colors hover:scale-105 transform cursor-pointer ${
+                      scrolled 
+                        ? 'text-gray-700 hover:text-emerald-600' 
+                        : 'text-white hover:text-emerald-300'
+                    }`}
+                  >
+                    {item.name}
+                  </motion.span>
+                </Link>
+              ) : (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className={`font-medium transition-colors hover:scale-105 transform ${
+                    scrolled 
+                      ? 'text-gray-700 hover:text-emerald-600' 
+                      : 'text-white hover:text-emerald-300'
+                  }`}
+                >
+                  {item.name}
+                </motion.a>
+              )
             ))}
           </div>
 
@@ -93,19 +112,33 @@ export default function Navigation() {
           transition={{ duration: 0.3 }}
           className="md:hidden overflow-hidden"
         >
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-purple-100 mb-4 p-4">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-emerald-100 mb-4 p-4">
             {navItems.map((item, index) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                onClick={() => setIsOpen(false)}
-                className="block py-3 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors font-medium"
-              >
-                {item.name}
-              </motion.a>
+              item.href.startsWith('/') ? (
+                <Link key={item.name} href={item.href}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    onClick={() => setIsOpen(false)}
+                    className="block py-3 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors font-medium cursor-pointer"
+                  >
+                    {item.name}
+                  </motion.div>
+                </Link>
+              ) : (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  onClick={() => setIsOpen(false)}
+                  className="block py-3 px-4 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors font-medium"
+                >
+                  {item.name}
+                </motion.a>
+              )
             ))}
           </div>
         </motion.div>

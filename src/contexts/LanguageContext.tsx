@@ -8,6 +8,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  isLoaded: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -26,6 +27,7 @@ interface LanguageProviderProps {
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const [language, setLanguageState] = useState<Language>('en');
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     // Load language from localStorage on client side
@@ -33,6 +35,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ja')) {
       setLanguageState(savedLanguage);
     }
+    setIsLoaded(true);
   }, []);
 
   const setLanguage = (lang: Language) => {
@@ -121,6 +124,15 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       // Language Switcher
       'language.english': 'English',
       'language.japanese': '日本語',
+
+      // Chat Page
+      'chat.backToPortfolio': 'Back to Portfolio',
+      'chat.back': 'Back',
+      'chat.title': 'Chat with Tamanna\'s AI',
+      'chat.subtitle': 'Ask me anything about Tamanna Akter',
+      'chat.initialMessage': 'Hello! I\'m here to answer any questions you have about Tamanna Akter. Feel free to ask about her background, skills, experience, projects, or anything else you\'d like to know about her professional profile!',
+      'chat.placeholder': 'Ask me about Tamanna\'s experience, skills, projects...',
+      'chat.errorMessage': 'Sorry, I encountered an error. Please try again.',
     },
     ja: {
       // Header
@@ -201,6 +213,15 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       // Language Switcher
       'language.english': 'English',
       'language.japanese': '日本語',
+
+      // Chat Page
+      'chat.backToPortfolio': 'ポートフォリオに戻る',
+      'chat.back': '戻る',
+      'chat.title': 'タマンナのAIとチャット',
+      'chat.subtitle': 'タマンナ・アクテールについて何でもお聞きください',
+      'chat.initialMessage': 'こんにちは！タマンナ・アクテールについてのご質問にお答えします。彼女の経歴、スキル、経験、プロジェクト、またはプロフェッショナルなプロフィールについて何でもお気軽にお聞きください！',
+      'chat.placeholder': 'タマンナの経験、スキル、プロジェクトについて聞いてみてください...',
+      'chat.errorMessage': '申し訳ありませんが、エラーが発生しました。もう一度お試しください。',
     }
   };
 
@@ -209,7 +230,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, isLoaded }}>
       {children}
     </LanguageContext.Provider>
   );

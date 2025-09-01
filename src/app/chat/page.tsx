@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, User, ArrowLeft, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Message {
   id: string;
@@ -13,17 +14,24 @@ interface Message {
 }
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      content: "Hello! I'm here to answer any questions you have about Tamanna Akter. Feel free to ask about her background, skills, experience, projects, or anything else you'd like to know about her professional profile!",
-      role: 'assistant',
-      timestamp: new Date(),
-    },
-  ]);
+  const { t, language, isLoaded } = useLanguage();
+  
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Initialize messages with translated content after language context is ready
+  useEffect(() => {
+    if (isLoaded) {
+      setMessages([{
+        id: '1',
+        content: t('chat.initialMessage'),
+        role: 'assistant',
+        timestamp: new Date(),
+      }]);
+    }
+  }, [language, t, isLoaded]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -53,7 +61,10 @@ export default function ChatPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: input.trim() }),
+        body: JSON.stringify({ 
+          message: input.trim(),
+          language: language 
+        }),
       });
 
       if (!response.body) {
@@ -110,7 +121,7 @@ export default function ChatPage() {
         ...prev,
         {
           id: (Date.now() + 1).toString(),
-          content: 'Sorry, I encountered an error. Please try again.',
+          content: t('chat.errorMessage'),
           role: 'assistant',
           timestamp: new Date(),
         },
@@ -127,6 +138,18 @@ export default function ChatPage() {
     }
   };
 
+  // Show loading until language context is ready
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50">
       {/* Header */}
@@ -138,8 +161,8 @@ export default function ChatPage() {
               className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 transition-colors text-sm"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span className="font-medium hidden sm:inline">Back to Portfolio</span>
-              <span className="font-medium sm:hidden">Back</span>
+              <span className="font-medium hidden sm:inline">{t('chat.backToPortfolio')}</span>
+              <span className="font-medium sm:hidden">{t('chat.back')}</span>
             </Link>
             <div className="flex-1">
               <div className="flex items-center gap-2">
@@ -147,8 +170,8 @@ export default function ChatPage() {
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-lg sm:text-xl font-bold text-gray-900">Chat with Tamanna&apos;s AI</h1>
-                  <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Ask me anything about Tamanna Akter</p>
+                  <h1 className="text-lg sm:text-xl font-bold text-gray-900">{t('chat.title')}</h1>
+                  <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">{t('chat.subtitle')}</p>
                 </div>
               </div>
             </div>
@@ -237,7 +260,7 @@ export default function ChatPage() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Ask me about Tamanna's experience, skills, projects..."
+                  placeholder={t('chat.placeholder')}
                   className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none text-sm sm:text-base text-gray-900 placeholder-gray-500 bg-white"
                   rows={1}
                   disabled={isLoading}

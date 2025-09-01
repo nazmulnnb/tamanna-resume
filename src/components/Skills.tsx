@@ -2,62 +2,68 @@
 
 import { motion } from 'framer-motion';
 import { Code, Database, Palette, Brain } from 'lucide-react';
-
-const skillCategories = [
-  {
-    title: "Frontend Development",
-    icon: Palette,
-    skills: [
-      { name: "ReactJS", level: "Professional", color: "from-blue-500 to-blue-600" },
-      { name: "NextJS", level: "Professional", color: "from-gray-700 to-gray-800" },
-      { name: "Tailwind CSS", level: "Professional", color: "from-cyan-500 to-cyan-600" },
-    ]
-  },
-  {
-    title: "Backend Development",
-    icon: Database,
-    skills: [
-      { name: "PHP", level: "Professional", color: "from-purple-600 to-purple-700" },
-      { name: "Laravel", level: "Professional", color: "from-red-500 to-red-600" },
-      { name: "FastAPI", level: "Professional", color: "from-green-500 to-green-600" },
-      { name: "Python", level: "Academic", color: "from-yellow-500 to-yellow-600" },
-    ]
-  },
-  {
-    title: "Database & Tools",
-    icon: Code,
-    skills: [
-      { name: "PostgreSQL", level: "Professional", color: "from-blue-600 to-blue-700" },
-      { name: "MySQL", level: "Professional", color: "from-orange-500 to-orange-600" },
-      { name: "Git", level: "Professional", color: "from-gray-600 to-gray-700" },
-    ]
-  },
-  {
-    title: "AI & Modern Tech",
-    icon: Brain,
-    skills: [
-      { name: "OpenAI API", level: "Professional", color: "from-emerald-500 to-emerald-600" },
-      { name: "Langchain", level: "Professional", color: "from-indigo-500 to-indigo-600" },
-      { name: "Vector DB", level: "Professional", color: "from-pink-500 to-pink-600" },
-    ]
-  }
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Skills() {
+  const { t, language } = useLanguage();
+
+  const skillCategories = [
+    {
+      title: t('skills.frontendTitle'),
+      icon: Palette,
+      skills: [
+        { name: "ReactJS", level: "Professional", color: "from-blue-500 to-blue-600" },
+        { name: "NextJS", level: "Professional", color: "from-gray-700 to-gray-800" },
+        { name: "Tailwind CSS", level: "Professional", color: "from-cyan-500 to-cyan-600" },
+      ]
+    },
+    {
+      title: t('skills.backendTitle'),
+      icon: Database,
+      skills: [
+        { name: "PHP", level: "Professional", color: "from-purple-600 to-purple-700" },
+        { name: "Laravel", level: "Professional", color: "from-red-500 to-red-600" },
+        { name: "FastAPI", level: "Professional", color: "from-green-500 to-green-600" },
+        { name: "Python", level: "Academic", color: "from-yellow-500 to-yellow-600" },
+      ]
+    },
+    {
+      title: t('skills.toolsTitle'),
+      icon: Code,
+      skills: [
+        { name: "PostgreSQL", level: "Professional", color: "from-blue-600 to-blue-700" },
+        { name: "MySQL", level: "Professional", color: "from-orange-500 to-orange-600" },
+        { name: "Git", level: "Professional", color: "from-gray-600 to-gray-700" },
+      ]
+    },
+    {
+      title: "AI & Modern Tech",
+      icon: Brain,
+      skills: [
+        { name: "OpenAI API", level: "Professional", color: "from-emerald-500 to-emerald-600" },
+        { name: "Langchain", level: "Professional", color: "from-indigo-500 to-indigo-600" },
+        { name: "Vector DB", level: "Professional", color: "from-pink-500 to-pink-600" },
+      ]
+    }
+  ];
+
   return (
-    <section className="py-20 px-6 bg-white">
+    <section key={language} className="py-20 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <motion.div
+          key={`title-${language}`}
           initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Technical Skills
+            {t('skills.title')}
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full"></div>
+          <p className="text-gray-600 text-lg">
+            {t('skills.subtitle')}
+          </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full mt-4"></div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -65,11 +71,10 @@ export default function Skills() {
             const IconComponent = category.icon;
             return (
               <motion.div
-                key={category.title}
+                key={`${category.title}-${language}`}
                 initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
-                viewport={{ once: true }}
                 className="bg-gradient-to-br from-white to-emerald-50 rounded-3xl p-6 shadow-lg border border-emerald-100 hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-6">
@@ -82,11 +87,10 @@ export default function Skills() {
                 <div className="space-y-4">
                   {category.skills.map((skill, skillIndex) => (
                     <motion.div
-                      key={skill.name}
+                      key={`${skill.name}-${language}`}
                       initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: (categoryIndex * 0.1) + (skillIndex * 0.1) }}
-                      viewport={{ once: true }}
                       className="group"
                     >
                       <div className="flex justify-between items-center mb-2">
@@ -101,10 +105,10 @@ export default function Skills() {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                         <motion.div
+                          key={`${skill.name}-bar-${language}`}
                           initial={{ width: 0 }}
-                          whileInView={{ width: skill.level === 'Professional' ? '90%' : '75%' }}
+                          animate={{ width: skill.level === 'Professional' ? '90%' : '75%' }}
                           transition={{ duration: 1, delay: (categoryIndex * 0.1) + (skillIndex * 0.1) + 0.5 }}
-                          viewport={{ once: true }}
                           className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
                         />
                       </div>

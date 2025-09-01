@@ -4,19 +4,21 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
-
-const navItems = [
-  { name: 'Skills', href: '#skills' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Education', href: '#education' },
-  { name: 'Contact', href: '#contact' },
-  { name: 'Chat AI', href: '/chat' },
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Navigation() {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const navItems = [
+    { name: t('nav.skills'), href: '#skills' },
+    { name: t('nav.experience'), href: '#experience' },
+    { name: t('nav.projects'), href: '#projects' },
+    { name: t('nav.education'), href: '#education' },
+    { name: t('nav.contact'), href: '#contact' },
+    { name: t('nav.chatAI'), href: '/chat' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {

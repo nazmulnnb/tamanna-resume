@@ -2,27 +2,30 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, Building, ExternalLink } from 'lucide-react';
-
-const experiences = [
-  {
-    title: "Full-stack Developer",
-    company: "Collective-AI LLC",
-    period: "November 2024 - Present",
-    type: "current",
-    description: "Working as a full-stack developer on cutting-edge AI applications and web platforms.",
-    technologies: ["Next.js", "FastAPI", "Python", "AI/ML"]
-  },
-  {
-    title: "Backend Development Intern",
-    company: "Jackpt",
-    period: "August 2023 - November 2023",
-    type: "completed",
-    description: "Developed and integrated APIs using Laravel for a unique platform facilitating service and product exchanges.",
-    technologies: ["PHP", "Laravel", "MySQL", "API Development"]
-  }
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Experience() {
+  const { t } = useLanguage();
+
+  const experiences = [
+    {
+      title: t('experience.fullStackDeveloper'),
+      company: "Collective-AI LLC",
+      period: "November 2024 - " + t('experience.present'),
+      type: "current",
+      description: t('experience.collectiveAI.description'),
+      technologies: ["Next.js", "FastAPI", "Python", "AI/ML"]
+    },
+    {
+      title: "Backend Development Intern",
+      company: "Jackpt",
+      period: "August 2023 - November 2023",
+      type: "completed",
+      description: t('experience.jackpt.description'),
+      technologies: ["PHP", "Laravel", "MySQL", "API Development"]
+    }
+  ];
+
   return (
     <section className="py-20 px-6 bg-gradient-to-br from-emerald-50 to-white">
       <div className="max-w-7xl mx-auto">
@@ -34,9 +37,12 @@ export default function Experience() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Professional Experience
+            {t('experience.title')}
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full"></div>
+          <p className="text-gray-600 text-lg">
+            {t('experience.subtitle')}
+          </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full mt-4"></div>
         </motion.div>
 
         <div className="relative">

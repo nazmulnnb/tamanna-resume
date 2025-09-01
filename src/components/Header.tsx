@@ -3,8 +3,12 @@
 import { motion } from 'framer-motion';
 import { Mail, Github, MapPin, Download, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useLanguage } from '../contexts/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
+  const { t } = useLanguage();
+
   return (
     <motion.header 
       initial={{ opacity: 0, y: -50 }}
@@ -17,6 +21,11 @@ export default function Header() {
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
       }}></div>
       
+      {/* Language Switcher */}
+      <div className="absolute top-6 right-6 z-[60]">
+        <LanguageSwitcher />
+      </div>
+      
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <motion.div 
@@ -26,14 +35,13 @@ export default function Header() {
             className="text-center lg:text-left"
           >
             <h1 className="text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-white via-emerald-200 to-emerald-300 bg-clip-text text-transparent">
-              Tamanna Akter
+              {t('header.name')}
             </h1>
             <h2 className="text-2xl lg:text-3xl font-light text-emerald-200 mb-6">
-              Full Stack Developer
+              {t('header.title')}
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-              A versatile and motivated Full Stack Developer with a strong foundation in computer science 
-              and professional experience in building modern web applications.
+              {t('header.description')}
             </p>
           </motion.div>
 
@@ -63,7 +71,7 @@ export default function Header() {
                 </a>
                 <div className="flex items-center gap-3 text-gray-300">
                   <MapPin className="w-5 h-5" />
-                  <span className="text-sm">Dhaka, Bangladesh</span>
+                  <span className="text-sm">{t('header.location')}</span>
                 </div>
               </div>
             </div>
@@ -76,7 +84,7 @@ export default function Header() {
                   className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-blue-500/25"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  Chat with AI
+                  {t('header.chatWithAI')}
                 </motion.button>
               </Link>
 
@@ -86,7 +94,7 @@ export default function Header() {
                 className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 justify-center transition-all shadow-lg hover:shadow-emerald-500/25"
               >
                 <Download className="w-4 h-4" />
-                Download Resume
+                {t('header.downloadResume')}
               </motion.button>
             </div>
           </motion.div>

@@ -2,44 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { GraduationCap, Award, Trophy, Calendar } from 'lucide-react';
-
-const education = {
-  degree: "BSc in Computer Science and Engineering",
-  university: "American International University - Bangladesh (AIUB)",
-  period: "January 2020 - January 2024",
-  cgpa: "3.89"
-};
-
-const certifications = [
-  {
-    name: "Japanese-Language Proficiency N4",
-    issuer: "JLPT",
-    type: "Language"
-  },
-  {
-    name: "IT Essentials: PC Hardware and Software",
-    issuer: "Cisco",
-    type: "Technical"
-  }
-];
-
-const achievements = [
-  {
-    title: "ACM ICPC Dhaka Regional Preliminary",
-    years: "2022 & 2023",
-    description: "Participated in prestigious programming competition"
-  },
-  {
-    title: "Dean's Honor List",
-    years: "Multiple Semesters",
-    description: "Recognized for academic excellence with high GPA",
-    details: [
-      "Spring 2022-2023: GPA 3.95",
-      "Spring 2020-2021: GPA 3.85", 
-      "Fall 2020-2021: GPA 3.89"
-    ]
-  }
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 const languages = [
   { name: "English", level: "Excellent", proficiency: 95 },
@@ -49,6 +12,46 @@ const languages = [
 ];
 
 export default function Education() {
+  const { t } = useLanguage();
+
+  const education = {
+    degree: t('education.bscTitle'),
+    university: t('education.university'),
+    period: "January 2020 - January 2024",
+    cgpa: "3.89"
+  };
+
+  const certifications = [
+    {
+      name: t('education.cert.jlpt'),
+      issuer: "JLPT",
+      type: "Language"
+    },
+    {
+      name: t('education.cert.cisco'),
+      issuer: "Cisco",
+      type: "Technical"
+    }
+  ];
+
+  const achievements = [
+    {
+      title: t('education.achievement.icpc'),
+      years: "2022 & 2023",
+      description: t('education.achievement.icpc.desc')
+    },
+    {
+      title: t('education.achievement.deans'),
+      years: "Multiple Semesters",
+      description: t('education.achievement.deans.desc'),
+      details: [
+        "Spring 2022-2023: GPA 3.95",
+        "Spring 2020-2021: GPA 3.85", 
+        "Fall 2020-2021: GPA 3.89"
+      ]
+    }
+  ];
+
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -60,9 +63,12 @@ export default function Education() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Education & Achievements
+            {t('education.title')}
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full"></div>
+          <p className="text-gray-600 text-lg">
+            {t('education.subtitle')}
+          </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full mt-4"></div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -100,7 +106,7 @@ export default function Education() {
                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-2xl">
                   <Award className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Certifications</h3>
+                <h3 className="text-2xl font-bold text-gray-900">{t('education.certifications')}</h3>
               </div>
 
               <div className="space-y-4">
@@ -138,7 +144,7 @@ export default function Education() {
                 <div className="bg-gradient-to-br from-amber-500 to-amber-600 p-3 rounded-2xl">
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Achievements</h3>
+                <h3 className="text-2xl font-bold text-gray-900">{t('education.achievements')}</h3>
               </div>
 
               <div className="space-y-6">
@@ -174,7 +180,7 @@ export default function Education() {
                 <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-2xl">
                   <GraduationCap className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Languages</h3>
+                <h3 className="text-2xl font-bold text-gray-900">{t('education.languages')}</h3>
               </div>
 
               <div className="space-y-4">

@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { Mail, Github, MapPin } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
 
   return (
     <section className="py-20 px-6 bg-gradient-to-br from-gray-50 to-emerald-50">
@@ -16,12 +18,14 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Let's Connect
+            {t('contact.title')}
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full"></div>
+          <p className="text-gray-600 text-lg">
+            {t('contact.subtitle')}
+          </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full mt-4"></div>
           <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
-            I'm always interested in new opportunities and collaborations. 
-            Feel free to reach out if you'd like to discuss a project or just say hello!
+            {t('contact.description')}
           </p>
         </motion.div>
 
@@ -47,7 +51,7 @@ export default function Contact() {
                     <Mail className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-800">Email</p>
+                    <p className="font-semibold text-gray-800">{t('contact.email')}</p>
                     <p className="text-emerald-600">tamannasristy2@gmail.com</p>
                   </div>
                 </motion.a>
@@ -63,7 +67,7 @@ export default function Contact() {
                     <Github className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-800">GitHub</p>
+                    <p className="font-semibold text-gray-800">{t('contact.github')}</p>
                     <p className="text-gray-600">github.com/tamanna104</p>
                   </div>
                 </motion.a>
@@ -76,8 +80,8 @@ export default function Contact() {
                     <MapPin className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-800">Location</p>
-                    <p className="text-emerald-600">Dhaka, Bangladesh</p>
+                    <p className="font-semibold text-gray-800">{t('contact.location')}</p>
+                    <p className="text-emerald-600">{t('header.location')}</p>
                   </div>
                 </motion.div>
               </div>

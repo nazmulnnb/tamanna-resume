@@ -2,60 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Calendar, Users } from 'lucide-react';
-
-const projects = [
-  {
-    title: "Keiba Ai GPT",
-    period: "December 2024 - Ongoing",
-    type: "Professional",
-    description: "A web application providing AI-driven predictions for horse racing. Users can ask questions about horses and predictions, which are answered by an LLM-based chatbot.",
-    technologies: ["Next.js", "FastAPI", "PostgreSQL", "Docker"],
-    teamSize: "4",
-    status: "ongoing",
-    category: "AI/ML"
-  },
-  {
-    title: "Jackpt",
-    period: "August 2023 - November 2023",
-    type: "Professional",
-    description: "A platform for service and product exchanges in Bangladesh without monetary transactions.",
-    technologies: ["PHP", "Laravel", "ReactJS", "MySQL"],
-    teamSize: "4",
-    status: "completed",
-    category: "E-commerce",
-    link: "http://jackptbd.com"
-  },
-  {
-    title: "Hospital Management System",
-    period: "Academic Project",
-    type: "Academic",
-    description: "A comprehensive user management system with four distinct roles (admin, manager, staff, client).",
-    technologies: ["TypeScript", "NextJS", "NestJS", "ReactJS", "Tailwind CSS"],
-    teamSize: "1",
-    status: "completed",
-    category: "Healthcare"
-  },
-  {
-    title: "Trip Planner",
-    period: "Personal Project",
-    type: "Personal",
-    description: "An application allowing users to plan trips, save routes, and adjust plans on the go.",
-    technologies: ["PHP", "JavaScript", "CSS", "MySQL"],
-    teamSize: "3",
-    status: "completed",
-    category: "Travel"
-  },
-  {
-    title: "Pet Adoption Portal",
-    period: "Academic Project",
-    type: "Academic",
-    description: "A portal for a pet shop to manage pet adoptions, veterinarian information, and appointments.",
-    technologies: ["C#", ".NET Framework", "MySQL"],
-    teamSize: "1",
-    status: "completed",
-    category: "Management"
-  }
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 const typeColors = {
   Professional: "from-emerald-500 to-emerald-600",
@@ -64,6 +11,62 @@ const typeColors = {
 };
 
 export default function Projects() {
+  const { t } = useLanguage();
+
+  const projects = [
+    {
+      title: "Keiba Ai GPT",
+      period: "December 2024 - Ongoing",
+      type: "Professional",
+      description: t('projects.keibaAI.description'),
+      technologies: ["Next.js", "FastAPI", "PostgreSQL", "Docker"],
+      teamSize: "4",
+      status: "ongoing",
+      category: "AI/ML"
+    },
+    {
+      title: "Jackpt",
+      period: "August 2023 - November 2023",
+      type: "Professional",
+      description: t('projects.jackpt.description'),
+      technologies: ["PHP", "Laravel", "ReactJS", "MySQL"],
+      teamSize: "4",
+      status: "completed",
+      category: "E-commerce",
+      link: "http://jackptbd.com"
+    },
+    {
+      title: "Hospital Management System",
+      period: "Academic Project",
+      type: "Academic",
+      description: t('projects.hospital.description'),
+      technologies: ["TypeScript", "NextJS", "NestJS", "ReactJS", "Tailwind CSS"],
+      teamSize: "1",
+      status: "completed",
+      category: "Healthcare"
+    },
+    {
+      title: "Trip Planner",
+      period: "Personal Project",
+      type: "Personal",
+      description: t('projects.tripPlanner.description'),
+      technologies: ["PHP", "JavaScript", "CSS", "MySQL"],
+      teamSize: "3",
+      status: "completed",
+      category: "Travel"
+    },
+    {
+      title: "Pet Adoption Portal",
+      period: "Academic Project",
+      type: "Academic",
+      description: t('projects.petAdoption.description'),
+      technologies: ["C#", ".NET Framework", "MySQL"],
+      teamSize: "1",
+      status: "completed",
+      category: "Management"
+    }
+  ];
+
   return (
     <section className="py-20 px-6 bg-gradient-to-br from-gray-900 to-emerald-900 text-white">
       <div className="max-w-7xl mx-auto">
@@ -75,9 +78,12 @@ export default function Projects() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            Featured Projects
+            {t('projects.title')}
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full"></div>
+          <p className="text-gray-300 text-lg">
+            {t('projects.subtitle')}
+          </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mt-4"></div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -147,7 +153,7 @@ export default function Projects() {
                       className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all"
                     >
                       <ExternalLink className="w-4 h-4" />
-                      Visit
+                      {t('projects.viewProject')}
                     </motion.a>
                   )}
                   <motion.button
@@ -156,7 +162,7 @@ export default function Projects() {
                     className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all backdrop-blur-sm"
                   >
                     <Github className="w-4 h-4" />
-                    Code
+                    {t('projects.sourceCode')}
                   </motion.button>
                 </div>
               </div>

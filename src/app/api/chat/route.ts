@@ -3,6 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 
+interface ChatMessage {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+}
+
 const openai = new OpenAI({
   apiKey: process.env.AZURE_OPENAI_API_KEY,
   baseURL: `${process.env.AZURE_OPENAI_ENDPOINT}/openai/deployments/${process.env.AZURE_OPENAI_DEPLOYMENT_NAME}`,
@@ -62,7 +67,7 @@ export async function POST(req: NextRequest) {
     const systemPrompt = await getSystemPrompt(language);
 
     // Convert frontend message format to OpenAI format and include history
-    const openAIMessages: Array<{role: 'system' | 'user' | 'assistant', content: string}> = [
+    const openAIMessages: ChatMessage[] = [
       {
         role: 'system',
         content: systemPrompt,
@@ -74,7 +79,7 @@ export async function POST(req: NextRequest) {
       // Skip the initial assistant message and add the rest
       const conversationHistory = messages.slice(1); // Skip the first welcome message
       
-      conversationHistory.forEach((msg: any) => {
+      conversationHistory.forEach((msg: ChatMessage) => {
         if (msg.role === 'user' || msg.role === 'assistant') {
           openAIMessages.push({
             role: msg.role,

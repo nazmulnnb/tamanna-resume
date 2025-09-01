@@ -48,7 +48,7 @@ export default function Skills() {
   ];
 
   return (
-    <section key={language} className="py-20 px-6 bg-white">
+    <section key={language} className="py-20 px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           key={`title-${language}`}
@@ -66,7 +66,7 @@ export default function Skills() {
           <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full mt-4"></div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
           {skillCategories.map((category, categoryIndex) => {
             const IconComponent = category.icon;
             return (

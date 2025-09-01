@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '../contexts/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navigation() {
   const { t } = useLanguage();
@@ -88,20 +89,30 @@ export default function Navigation() {
                 </motion.a>
               )
             ))}
+            
+            {/* Language Switcher for Desktop */}
+            <div className="ml-4">
+              <LanguageSwitcher scrolled={scrolled} />
+            </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden p-2 rounded-xl transition-colors ${
-              scrolled 
-                ? 'text-gray-900 hover:bg-emerald-100' 
-                : 'text-white hover:bg-white/20'
-            }`}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </motion.button>
+          {/* Mobile Language Switcher and Menu Button */}
+          <div className="md:hidden flex items-center gap-3">
+            <div className="scale-75">
+              <LanguageSwitcher scrolled={scrolled} />
+            </div>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsOpen(!isOpen)}
+              className={`p-2 rounded-xl transition-colors ${
+                scrolled 
+                  ? 'text-gray-900 hover:bg-emerald-100' 
+                  : 'text-white hover:bg-white/20'
+              }`}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </motion.button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

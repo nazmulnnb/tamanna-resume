@@ -38,8 +38,8 @@ export default function Contact() {
             viewport={{ once: true }}
             className="mx-auto"
           >
-            <div className="bg-white rounded-3xl p-8 shadow-xl border border-emerald-100">
-              <h3 className="text-2xl font-bold text-gray-900 mb-8">Get in Touch</h3>
+            <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl border border-emerald-100">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Get in Touch</h3>
               
               <div className="space-y-6">
                 <motion.a
@@ -47,12 +47,12 @@ export default function Contact() {
                   whileHover={{ scale: 1.02 }}
                   className="flex items-center gap-4 p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-2xl hover:from-emerald-100 hover:to-emerald-200 transition-all duration-300 group"
                 >
-                  <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-xl group-hover:scale-110 transition-transform">
+                  <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-xl group-hover:scale-110 transition-transform flex-shrink-0">
                     <Mail className="w-5 h-5 text-white" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-semibold text-gray-800">{t('contact.email')}</p>
-                    <p className="text-emerald-600">tamannasristy2@gmail.com</p>
+                    <p className="text-emerald-600 break-words text-sm sm:text-base">tamannasristy2@gmail.com</p>
                   </div>
                 </motion.a>
 
@@ -63,12 +63,12 @@ export default function Contact() {
                   whileHover={{ scale: 1.02 }}
                   className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl hover:from-gray-100 hover:to-gray-200 transition-all duration-300 group"
                 >
-                  <div className="bg-gradient-to-br from-gray-700 to-gray-800 p-3 rounded-xl group-hover:scale-110 transition-transform">
+                  <div className="bg-gradient-to-br from-gray-700 to-gray-800 p-3 rounded-xl group-hover:scale-110 transition-transform flex-shrink-0">
                     <Github className="w-5 h-5 text-white" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-semibold text-gray-800">{t('contact.github')}</p>
-                    <p className="text-gray-600">github.com/tamanna104</p>
+                    <p className="text-gray-600 break-words text-sm sm:text-base">github.com/tamanna104</p>
                   </div>
                 </motion.a>
 
@@ -76,12 +76,12 @@ export default function Contact() {
                   whileHover={{ scale: 1.02 }}
                   className="flex items-center gap-4 p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-2xl transition-all duration-300 group"
                 >
-                  <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-xl group-hover:scale-110 transition-transform">
+                  <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-xl group-hover:scale-110 transition-transform flex-shrink-0">
                     <MapPin className="w-5 h-5 text-white" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-semibold text-gray-800">{t('contact.location')}</p>
-                    <p className="text-emerald-600">{t('header.location')}</p>
+                    <p className="text-emerald-600 break-words text-sm sm:text-base">{t('header.location')}</p>
                   </div>
                 </motion.div>
               </div>

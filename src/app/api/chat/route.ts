@@ -53,7 +53,7 @@ ${isJapanese ?
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, language } = await req.json();
+    const { message, language, messages } = await req.json();
 
     if (!message) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
@@ -61,18 +61,38 @@ export async function POST(req: NextRequest) {
 
     const systemPrompt = await getSystemPrompt(language);
 
+    // Convert frontend message format to OpenAI format and include history
+    const openAIMessages: Array<{role: 'system' | 'user' | 'assistant', content: string}> = [
+      {
+        role: 'system',
+        content: systemPrompt,
+      },
+    ];
+
+    // Add conversation history if provided
+    if (messages && Array.isArray(messages)) {
+      // Skip the initial assistant message and add the rest
+      const conversationHistory = messages.slice(1); // Skip the first welcome message
+      
+      conversationHistory.forEach((msg: any) => {
+        if (msg.role === 'user' || msg.role === 'assistant') {
+          openAIMessages.push({
+            role: msg.role,
+            content: msg.content,
+          });
+        }
+      });
+    }
+
+    // Add the current message
+    openAIMessages.push({
+      role: 'user',
+      content: message,
+    });
+
     const stream = await openai.chat.completions.create({
       model: process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4',
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        {
-          role: 'user',
-          content: message,
-        },
-      ],
+      messages: openAIMessages,
       stream: true,
       temperature: 0.7,
       max_tokens: 1000,

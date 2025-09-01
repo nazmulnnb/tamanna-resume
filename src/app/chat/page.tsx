@@ -75,7 +75,8 @@ export default function ChatPage() {
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInput('');
     setIsLoading(true);
 
@@ -87,7 +88,8 @@ export default function ChatPage() {
         },
         body: JSON.stringify({ 
           message: input.trim(),
-          language: language 
+          language: language,
+          messages: updatedMessages // Send the conversation history
         }),
       });
 

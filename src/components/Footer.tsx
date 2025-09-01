@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, Mail, Github, MapPin } from 'lucide-react';
+import { Mail, Github, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -87,15 +87,10 @@ export default function Footer() {
           viewport={{ once: true }}
           className="pt-8 border-t border-emerald-800/50"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
             <p className="text-gray-400 text-sm">
               © 2025 Tamanna Akter. All rights reserved.
             </p>
-            <div className="flex items-center gap-2 text-gray-400 text-sm">
-              <span>Made with</span>
-              <Heart className="w-4 h-4 text-red-400 animate-pulse" />
-              <span>using Next.js & Framer Motion</span>
-            </div>
           </div>
         </motion.div>
       </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, Building, ExternalLink } from 'lucide-react';
+import { Calendar, Building } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Experience() {

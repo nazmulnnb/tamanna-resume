@@ -99,7 +99,7 @@ export default function ChatPage() {
                 );
               }
             } catch (e) {
-              // Ignore parsing errors for partial chunks
+              console.error('Error parsing chunk:', e);
             }
           }
         }
@@ -147,7 +147,7 @@ export default function ChatPage() {
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-lg sm:text-xl font-bold text-gray-900">Chat with Tamanna's AI</h1>
+                  <h1 className="text-lg sm:text-xl font-bold text-gray-900">Chat with Tamanna&apos;s AI</h1>
                   <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Ask me anything about Tamanna Akter</p>
                 </div>
               </div>

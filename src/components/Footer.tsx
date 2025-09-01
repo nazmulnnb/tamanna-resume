@@ -43,7 +43,7 @@ export default function Footer() {
                 { name: t('nav.education'), href: '#education' },
                 { name: t('nav.contact'), href: '#contact' },
                 { name: t('nav.chatAI'), href: '/chat' }
-              ].map((link, index) => {
+              ].map((link) => {
                 const LinkComponent = link.href.startsWith('/') ? Link : motion.a;
                 
                 return (

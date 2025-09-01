@@ -23,23 +23,29 @@ I am excited about pursuing a career in Japan, attracted by its reputation as on
 
 ## 🛠️ Technical Skills  
 
-| Skill | Level (B=Professional, C=Academic) |
-|-------|------------------------------------|
-| PHP | B |
-| LARAVEL | B |
-| ReactJS | B |
-| NextJS | B |
-| FastAPI | B |
-| Python | C |
-| C++ | C |
-| Postgres & MySQL | B |
-| .Net | C |
-| Git | B |
-| Algorithms | C |
-| Tailwind CSS | B |
-| OpenAI API | B |
-| Langchain | B |
-| Vector DB | B |
+### Frontend Development
+- **Next.js** (Professional)
+- **React.js** (Professional) 
+- **Tailwind CSS** (Professional)
+- **Streamlit** (Professional)
+
+### Backend Development
+- **Python** (Professional)
+- **FastAPI** (Professional)
+- **NestJS** (Professional)
+- **Laravel** (Professional)
+
+### Tools & Technologies
+- **PostgreSQL** (Professional)
+- **MySQL** (Professional)
+- **Git** (Professional)
+- **Docker** (Professional)
+
+### AI & Modern Tech
+- **OpenAI API** (Professional)
+- **Langchain** (Professional)
+- **Vector DB** (Professional)
+- **RAG** (Professional)
 
 ---
 

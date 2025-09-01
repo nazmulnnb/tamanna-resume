@@ -12,19 +12,20 @@ export default function Skills() {
       title: t('skills.frontendTitle'),
       icon: Palette,
       skills: [
-        { name: "ReactJS", level: "Professional", color: "from-blue-500 to-blue-600" },
-        { name: "NextJS", level: "Professional", color: "from-gray-700 to-gray-800" },
+        { name: "Next.js", level: "Professional", color: "from-gray-700 to-gray-800" },
+        { name: "React.js", level: "Professional", color: "from-blue-500 to-blue-600" },
         { name: "Tailwind CSS", level: "Professional", color: "from-cyan-500 to-cyan-600" },
+        { name: "Streamlit", level: "Professional", color: "from-red-500 to-red-600" },
       ]
     },
     {
       title: t('skills.backendTitle'),
       icon: Database,
       skills: [
-        { name: "PHP", level: "Professional", color: "from-purple-600 to-purple-700" },
-        { name: "Laravel", level: "Professional", color: "from-red-500 to-red-600" },
+        { name: "Python", level: "Professional", color: "from-yellow-500 to-yellow-600" },
         { name: "FastAPI", level: "Professional", color: "from-green-500 to-green-600" },
-        { name: "Python", level: "Academic", color: "from-yellow-500 to-yellow-600" },
+        { name: "NestJS", level: "Professional", color: "from-red-600 to-red-700" },
+        { name: "Laravel", level: "Professional", color: "from-orange-500 to-orange-600" },
       ]
     },
     {
@@ -32,17 +33,19 @@ export default function Skills() {
       icon: Code,
       skills: [
         { name: "PostgreSQL", level: "Professional", color: "from-blue-600 to-blue-700" },
-        { name: "MySQL", level: "Professional", color: "from-orange-500 to-orange-600" },
+        { name: "MySQL", level: "Professional", color: "from-blue-500 to-blue-600" },
         { name: "Git", level: "Professional", color: "from-gray-600 to-gray-700" },
+        { name: "Docker", level: "Professional", color: "from-blue-400 to-blue-500" },
       ]
     },
     {
-      title: "AI & Modern Tech",
+      title: t('skills.aiTitle'),
       icon: Brain,
       skills: [
         { name: "OpenAI API", level: "Professional", color: "from-emerald-500 to-emerald-600" },
         { name: "Langchain", level: "Professional", color: "from-indigo-500 to-indigo-600" },
         { name: "Vector DB", level: "Professional", color: "from-pink-500 to-pink-600" },
+        { name: "RAG", level: "Professional", color: "from-purple-500 to-purple-600" },
       ]
     }
   ];

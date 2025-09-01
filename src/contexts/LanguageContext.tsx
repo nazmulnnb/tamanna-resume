@@ -65,7 +65,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       'skills.frontendTitle': 'Frontend Development',
       'skills.backendTitle': 'Backend Development',
       'skills.toolsTitle': 'Tools & Technologies',
-      'skills.databaseTitle': 'Database Management',
+      'skills.aiTitle': 'AI & Modern Tech',
 
       // Experience
       'experience.title': 'Professional Experience',
@@ -145,7 +145,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       'skills.frontendTitle': 'フロントエンド開発',
       'skills.backendTitle': 'バックエンド開発',
       'skills.toolsTitle': 'ツールと技術',
-      'skills.databaseTitle': 'データベース管理',
+      'skills.aiTitle': 'AI & モダン技術',
 
       // Experience
       'experience.title': '職歴',

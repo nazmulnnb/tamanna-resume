@@ -19,7 +19,31 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState<number>(0);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Handle viewport height changes for mobile keyboard
+  useEffect(() => {
+    const handleResize = () => {
+      // Use the actual visual viewport height or fallback to window height
+      const height = window.visualViewport?.height || window.innerHeight;
+      setViewportHeight(height);
+    };
+
+    // Set initial height
+    handleResize();
+
+    // Listen for visual viewport changes (mobile keyboard)
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize);
+      return () => window.visualViewport?.removeEventListener('resize', handleResize);
+    } else {
+      // Fallback for browsers without visual viewport support
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   // Initialize messages with translated content after language context is ready
   useEffect(() => {
@@ -138,6 +162,18 @@ export default function ChatPage() {
     }
   };
 
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+    // Small delay to ensure keyboard is shown before scrolling
+    setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 300);
+  };
+
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
+  };
+
   // Show loading until language context is ready
   if (!isLoaded) {
     return (
@@ -151,9 +187,9 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50">
+    <div className="bg-gradient-to-br from-gray-50 to-emerald-50 overflow-hidden" style={{ height: viewportHeight || '100vh' }}>
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-md border-b border-emerald-100 sticky top-0 z-10">
+      <div className="bg-white/80 backdrop-blur-md border-b border-emerald-100 flex-shrink-0">
         <div className="max-w-4xl mx-auto px-4 py-3">
           <div className="flex items-center gap-3">
             <Link
@@ -180,10 +216,10 @@ export default function ChatPage() {
       </div>
 
       {/* Chat Messages */}
-      <div className="max-w-4xl mx-auto px-4 py-4">
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-emerald-100 h-[calc(100vh-150px)] flex flex-col">
+      <div className="max-w-4xl mx-auto px-4 py-4 flex flex-col" style={{ height: 'calc(100% - 80px)' }}>
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-emerald-100 flex flex-col h-full min-h-0">
           {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-4 sm:space-y-6">
+          <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-4 sm:space-y-6 min-h-0">
             <AnimatePresence>
               {messages.map((message) => (
                 <motion.div
@@ -253,16 +289,20 @@ export default function ChatPage() {
           </div>
 
           {/* Input Area */}
-          <div className="p-3 sm:p-6 border-t border-gray-100">
+          <div className="p-3 sm:p-6 border-t border-gray-100 flex-shrink-0">
             <div className="flex gap-2 sm:gap-4">
               <div className="flex-1 relative">
                 <textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
                   placeholder={t('chat.placeholder')}
-                  className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none text-sm sm:text-base text-gray-900 placeholder-gray-500 bg-white"
-                  rows={1}
+                  className={`w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none text-sm sm:text-base text-gray-900 placeholder-gray-500 bg-white ${
+                    isInputFocused ? 'min-h-[60px]' : ''
+                  }`}
+                  rows={isInputFocused ? 2 : 1}
                   disabled={isLoading}
                 />
               </div>
